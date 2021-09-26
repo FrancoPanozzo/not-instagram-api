@@ -9,4 +9,9 @@ const PORT = process.env.PORT || 3000
 // App init
 const app = express()
 
-app.listen(PORT, console.log(`Running in ${process.env.NODE_ENV.toUpperCase()} mode on port: ${PORT}.`))
+app.listen(
+    PORT,
+    console.log(
+        `Running in ${process.env.NODE_ENV.toUpperCase()} mode on port: ${PORT}.`
+    )
+)
