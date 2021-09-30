@@ -20,6 +20,8 @@ db.authenticate()
 // App init
 const app = express()
 
+app.use('/users', require('./routes/users'))
+
 app.listen(
     PORT,
     console.log(
