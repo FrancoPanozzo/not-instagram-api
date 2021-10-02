@@ -25,6 +25,9 @@ module.exports = db.define(
         gender: {
             type: Sequelize.STRING,
         },
+        DOB: {
+            type: Sequelize.DATE,
+        },
         country: {
             type: Sequelize.STRING,
         },

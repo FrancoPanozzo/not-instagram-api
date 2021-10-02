@@ -6,7 +6,7 @@ dotenv.config({ path: './config/.env' })
 
 const PORT = process.env.PORT || 3000
 
-//Import DB
+//Connect DB
 const db = require('./config/db')
 
 db.authenticate()
@@ -20,7 +20,15 @@ db.authenticate()
 // App init
 const app = express()
 
-app.use('/users', require('./routes/users'))
+// Body Parser
+app.use(express.json())
+app.use(
+    express.urlencoded({
+        extended: true,
+    })
+)
+
+app.use('/users', require('./routes/user'))
 
 app.listen(
     PORT,
