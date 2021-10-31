@@ -2,19 +2,22 @@ const User = require('../models/user')
 
 module.exports.getAll = async (req, res) => {
     const allUsers = await User.findAll()
-    res.send(allUsers)
+    res.json(allUsers)
 }
 
 module.exports.get = async (req, res) => {
     const id = req.params.id
     const user = await User.findByPk(id)
-    res.send(user)
+    res.json(user)
 }
 
 module.exports.post = async (req, res) => {
-    console.log(req.body)
-    const user = await User.create(req.body)
-    res.send(user)
+    try {
+        const user = await User.create(req.body)
+        res.json(user)
+    } catch (error) {
+        res.status(500).json(error.errors)
+    }
 }
 
 module.exports.put = async (req, res) => {
@@ -33,5 +36,7 @@ module.exports.delete = async (req, res) => {
         where: { id },
     })
     res.status(200)
-    res.send()
+    res.json({
+        text: 'User deleted succesfully',
+    })
 }

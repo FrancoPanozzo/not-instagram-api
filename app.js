@@ -1,5 +1,6 @@
 const express = require('express')
 const dotenv = require('dotenv')
+const cors = require('cors')
 
 // Load config
 dotenv.config({ path: './config/.env' })
@@ -19,6 +20,8 @@ db.authenticate()
 
 // App init
 const app = express()
+
+app.use(cors())
 
 // Body Parser
 app.use(express.json())

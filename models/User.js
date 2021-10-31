@@ -34,6 +34,9 @@ module.exports = db.define(
         city: {
             type: Sequelize.STRING,
         },
+        ui_theme: {
+            type: Sequelize.STRING,
+        },
     },
     {
         timestamps: false,
