@@ -1,9 +1,10 @@
-const express = require('express')
+// Replace env vars with values
 const dotenv = require('dotenv')
-const cors = require('cors')
-
-// Load config
 dotenv.config({ path: './config/.env' })
+
+const express = require('express')
+const cors = require('cors')
+const cloudinary = require('./config/cloudinary')
 
 const PORT = process.env.PORT || 3000
 
