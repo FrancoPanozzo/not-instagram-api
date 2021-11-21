@@ -1,11 +1,11 @@
 const model = require('../models/user')
 
-module.exports.getAll = async (req, res) => {
-    const allUsers = await model.findAll()
+module.exports.get = async (req, res) => {
+    const allUsers = await model.findAll(req.body.data)
     res.json(allUsers)
 }
 
-module.exports.get = async (req, res) => {
+module.exports.getById = async (req, res) => {
     const id = req.params.id
     const user = await model.findByPk(id)
     res.json(user)
@@ -13,10 +13,21 @@ module.exports.get = async (req, res) => {
 
 module.exports.post = async (req, res) => {
     try {
-        const user = await model.create(req.body)
-        res.json(user)
+        res.json(await model.create(req.body))
     } catch (error) {
-        res.status(500).json(error.errors)
+        const emailTaken = error.errors[0].message === 'email must be unique'
+        const email = error.errors[0].value
+
+        if (emailTaken) {
+            const user = await model.findOne({
+                where: {
+                    email,
+                },
+            })
+            res.json(user)
+        } else {
+            res.status(500).json(error.errors)
+        }
     }
 }
 
