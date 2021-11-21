@@ -1,14 +1,15 @@
 const Sequelize = require('sequelize')
 
+const { DB_HOST, DB_PORT, DB_MAX, DB_NAME, DB_USER, DB_PASS } = process.env
 const connectionConfig = {
-    host: process.env.DB_HOST || 'localhost',
-    port: process.env.DB_PORT || 5432,
+    host: DB_HOST || 'localhost',
+    port: DB_PORT || 5432,
     pool: {
-        max: process.env.DB_MAX || 30,
+        max: DB_MAX || 30,
     },
-    database: process.env.DB_NAME,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
+    database: DB_NAME,
+    username: DB_USER,
+    password: DB_PASS,
     dialect: 'postgres',
 }
 
